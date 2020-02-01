@@ -8,25 +8,29 @@ public class Lab04 {
         Scanner in = new Scanner(System.in);
         String response = "";
         
-        while (!(response.trim().equals("exit"))) {
+        while (true) {
             System.out.print("> ");
             response = in.nextLine();
-            preprocess(response);
             
-
-
-
-        }
-        
-        System.out.println("Goodbye!");
-          
+            if (response.trim().equals("exit")) {
+                System.out.println("Goodbye!");
+                break;
+        	}
+            
+            if(response.equals("")){
+            	continue;
+            }
+           System.out.println(preprocess(response));
+           Expression expr = (expressionify(preprocess(response)));
+           
+        } 
     }
 	
 	
 	
-	public static String preprocess(String unprocessedString) {
+	private static String preprocess(String unprocessedString) {
+		
         char[] responseChar = unprocessedString.toCharArray();
-        
 		
 		unprocessedString.trim();
 		
@@ -41,6 +45,13 @@ public class Lab04 {
         		break;
         	}
         	
+        	else if (readChar == '\\') {
+        		
+        	}
+        	
+        	else if (readChar == ' ')
+        		continue;
+        	
         	else {
         		processed += readChar;
         	}
@@ -49,11 +60,16 @@ public class Lab04 {
         	processed += " ";
         }
         
-        if (processed.equals(""))
-        	return processed;
-        
-        System.out.println(processed);
         return processed;
 		
 	}
+
+	
+	private static Expression expressionify(String abc) {
+		Expression expr = new Variable (abc);
+		return expr;
+	}
+	
+	
+	
 }
